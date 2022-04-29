@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #head{
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        #container{
+            width: 30%;
+            margin: auto;
+            height: 500px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            border-radius: 10px;
+        }
+        #container>h3{
+            text-align: center;
+            padding: 25px;
+        }
+        #form{
+            display: block;
+            padding: 10px;
+        }
+        input{
+            width: 80%;
+            display: flex;
+            margin: auto;
+            padding: 7px 0px 7px 0px;
+        }
+        p{
+            margin-left: 9%;
+            margin-bottom: 1%;
+            font-weight: 700;
+        }
+        #bottom{
+            color:rgb(188, 181, 181);
+            margin-left: 33%;
+        }
+        #password{
+            margin-bottom: 35px;
+        }
+        h5{
+            margin-bottom: 30px;  
+            padding-left: 9%;
+            padding-right: 9%;
+            font-size: 12px; 
+            color: rgb(154, 153, 153);
+        }
+        #submit{
+            margin-bottom: 35px;
+        }
+        #container>p{
+            margin-left: 20%;
+        }
+
+
+    </style>
+</head>
+<body>
+    <di id="head">
+        <img src="https://www.masaischool.com/img/navbar/logo.svg"/>
+    </di>
+    <div id="container">
+        <h3>Sign Up</h3>
+        <form>
+            <p>Full name</p>
+            <input id="name" type="text" placeholder="Enter your full name"/>
+            <p>Email</p>
+            <input id="mail" type="email" placeholder="Enter email"/>
+            <p>Password</p>
+            <input id="password" type="password" placeholder="Enter password"/>
+            <h5>By signing up, I accept the Masai School Terms of service and 
+                acknowledge the Privacy Policy.</h5>
+            <input id="submit" type="submit" >
+        </form>
+        <p>Already have an account? Sign In</p>
+        
+    </div>
+    <p id="bottom">ⓒ 2022 by Masai School Privacy Policy & Terms and Conditions</p>
+</body>
+</html>
+<script>
+    let form=document.querySelector("form");
+    form.addEventListener("submit",function(event){
+        event.preventDefault();
+        let data={
+            username:form.name.value,
+            email:form.mail.value,
+            password:form.password.value
+        }
+        localStorage.setItem("data",JSON.stringify(data));
+        window.location.href="signin.html";
+    });
+</script>

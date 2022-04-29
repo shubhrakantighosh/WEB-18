@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+#bar{
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(0, 0, 0);
+    font-size: 35px;
+}
+    a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+#head{
+    display: flex;
+    justify-content: center;
+}
+#box{
+    padding: 10px;
+    margin: auto;
+    margin-top: 3px;
+    height: 200px;
+    width: 300px;
+    background-color: rgb(140, 79, 247);
+}
+input{
+ display:block;
+ margin:10px auto;
+ width: 80%;
+padding:1% 5px; 
+ } 
+ *{
+    font-family: "Roboto", sans-serif;
+}
+
+    </style>
+</head>
+<body>
+    <div id="head">
+        <img src="https://www.masaischool.com/img/navbar/logo.svg"/>
+    </div>
+    <div id="bar">
+        <div><a href="backend.html">Baackend</a></div>
+        <div><a href="frontend.html">Frontend</a></div>
+
+    </div>
+    <form id="box">
+        <input id="img" type="text" placeholder="Enter Image URL"/>
+        <input id="name" type="text" placeholder="Enter Investor name"/>
+        <input id="role" type="text" placeholder="Enter Investor role"/>
+        <input id="logo" type="text" placeholder="Enter company logo URL"/>
+        <input type="submit" />
+    </form>
+</body>
+</html>
+<script>
+    document.querySelector("#box").addEventListener("submit",mychoise);
+    let investors=JSON.parse(localStorage.getItem("investors"))||[];
+    let investors1=[];
+    function mychoise(){
+        event.preventDefault();
+        let investorsobj={
+            investorImg:box.img.value,
+            investorName:box.name.value,
+            investorRole:box.role.value,
+            investorCompanylogo:box.logo.value,
+        }
+       investors1.push(investorsobj)
+       localStorage.setItem("data",JSON.stringify(investors1))
+    }
+</script>
