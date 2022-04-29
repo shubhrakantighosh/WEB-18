@@ -50,10 +50,10 @@ padding:1% 5px;
 
     </div>
     <form id="box">
-        <input id="img" type="text" placeholder="Enter Image URL"/>
+        <input id="imgURL" type="text" placeholder="Enter Image URL"/>
         <input id="name" type="text" placeholder="Enter Investor name"/>
         <input id="role" type="text" placeholder="Enter Investor role"/>
-        <input id="logo" type="text" placeholder="Enter company logo URL"/>
+        <input id="companyLogo" type="text" placeholder="Enter company logo URL"/>
         <input type="submit" />
     </form>
 </body>
@@ -65,10 +65,10 @@ padding:1% 5px;
     function mychoise(){
         event.preventDefault();
         let investorsobj={
-            investorImg:box.img.value,
+            investorImg:box.imgURL.value,
             investorName:box.name.value,
             investorRole:box.role.value,
-            investorCompanylogo:box.logo.value,
+            investorCompanylogo:box.companyLogo.value,
         }
        investors1.push(investorsobj)
        localStorage.setItem("data",JSON.stringify(investors1))
