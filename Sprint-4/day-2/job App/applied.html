@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Database</title>
+    <link rel="stylesheet" href="commonStyles.css" />
+  </head>
+
+  <body>
+    <div id="links">
+      <div><a href="index.html">Home</a></div>
+      <div><a href="applied.html">Applied Jobs</a></div>
+      <div><a href="bookmark.html">Bookmarks</a></div>
+    </div>
+    <select id="sortName" onchange="namesort()">
+      <option>Sort By Name</option>
+      <option value="as">Ascending</option>
+      <option value="des">Descending</option>
+    </select>
+    <select id="salarysort" onchange="salarysort()">
+      <option>Sort By Salary</option>
+      <option value="hi">High</option>
+      <option value="lo">Low</option>
+    </select>
+    <select id="filterrole" onchange="filterrole()">
+      <option>Sort By Job Role</option>
+      <option value="FSD">FSD</option>
+      <option value="Backend">BACKEND</option>
+      <option value="Frontend">FRONTEND</option>
+    </select>
+
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Job applied</th>
+            <th>Salary expected</th>
+            <th>Add to bookmark</th>
+          </tr>
+        </thead>
+        <tbody id="body">
+          <!-- Append your output to tbody -->
+        </tbody>
+      </table>
+    </main>
+  </body>
+  <script>
+    //you need to code here
+    let jobArr=JSON.parse(localStorage.getItem("jobList"));
+   
+    displaydata(jobArr);
+
+    document.querySelector("#sortName").addEventListener("change",namesort());
+    function namesort(){
+      let s=document.querySelector("#sortName").value;
+      if(s=="as"){
+        jobArr.sort(function(a,b){
+          if(a.name>b.name){
+            return 1;
+          }
+          if(a.name< b.name){
+            return -1;
+          }
+          return 0;
+        });
+        displaydata(jobArr);
+        
+      }
+      else if(s=="des"){
+        jobArr.sort(function(a,b){
+          if(b.name>a.name){
+            return 1;
+          }
+          if(b.name< a.name){
+            return -1;
+          }
+          return 0;
+        });
+        displaydata(jobArr);
+      }
+    }
+    function salarysort(){
+    let e=document.querySelector("#salarysort").value;
+      if(e=="hi"){
+        jobArr.sort(function(a,b){
+          return b.salary-a.salary;
+        });
+        displaydata(jobArr);
+        
+      }
+      else if(e=="lo"){
+        jobArr.sort(function(a,b){
+          return a.salary-b.salary;
+        });
+        displaydata(jobArr);
+      }
+    }
+
+    function filterrole(){
+      let q=document.querySelector("#filterrole").value;
+      let r=jobArr.filter(function(elem){
+        return elem.role==q;
+      });
+      displaydata(r);
+    }
+
+    //  let sum=jobArr.reduce(function(acc,elem){
+    //   return acc + Number(elem.salary);
+    // },0);
+    // console.log(sum);
+
+    let bookmarksarray=JSON.parse(localStorage.getItem("Bookmarks")) || [];
+    function displaydata(jobArr){
+      document.querySelector("tbody").innerHTML="";
+      jobArr.forEach(function(elem){
+        let tr =document.createElement("tr");
+
+        let td1=document.createElement("td");
+        td1.innerText=elem.name;
+        let td2=document.createElement("td");
+        td2.innerText=elem.email;
+        let td3=document.createElement("td");
+        td3.innerText=elem.role;
+        let td4=document.createElement("td");
+        td4.innerText=elem.salary;
+        let td5=document.createElement("td");
+        td5.innerText="Bookmark";
+        td5.style.color="blue";
+        td5.style.cursor="pointer";
+        td5.addEventListener("click",function(){
+          bookmarks(elem);
+        });
+        tr.append(td1,td2,td3,td4,td5);
+        document.querySelector("#body").append(tr);
+      });
+      function bookmarks(elem){
+        bookmarksarray.push(elem);
+        localStorage.setItem("Bookmarks",JSON.stringify(bookmarksarray));
+      }
+    }
+  </script>
+</html>
